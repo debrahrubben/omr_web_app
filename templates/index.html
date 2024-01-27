@@ -8,8 +8,31 @@
 <body>
     <h1>OMR Web App</h1>
     <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept=".png, .jpg, .jpeg">
-        <button type="submit">Upload</button>
+        <br>
+        <div>
+            <input type="file" name="file" accept=".png, .jpg, .jpeg">
+        
+            <!-- Add input fields for correct answers -->
+            <label for="q1">Question 1:</label>
+            <input type="text" name="q1" required>
+            
+            <label for="q2">Question 2:</label>
+            <input type="text" name="q2" required>
+            
+            <label for="q3">Question 3:</label>
+            <input type="text" name="q3" required>
+            
+            <label for="q4">Question 4:</label>
+            <input type="text" name="q4" required>
+            
+            <label for="q5">Question 5:</label>
+            <input type="text" name="q5" required>
+            <br>
+    
+            <button type="submit">Upload</button>
+        </div>
+       
     </form>
 </body>
 </html>
+
