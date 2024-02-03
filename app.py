@@ -62,12 +62,10 @@ def index():
 def upload():
     if 'file' not in request.files:
         return "No file part"
-    
     file = request.files['file']
-    
+
     if file.filename == '':
         return "No selected file"
-    
     # Retrieve correct answers from the form
     correct_answers = {key: request.form[key] for key in request.form.keys() if key.startswith('q')}
 
