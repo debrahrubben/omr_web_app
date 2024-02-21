@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Scannable Sheet Marker</title>
+  <style>
+    /* Add CSS styling for the layout */
+    .container {
+      text-align: center;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Scannable Sheet Marker</h1>
+    <input type="file" id="scannedSheet" accept="image/*" />
+    <button onclick="processSheet()">Mark Sheet</button>
+    <div id="results"></div>
+  </div>
+
+  <script>
+    // Function to send scanned sheet to backend API for processing
+    function processSheet() {
+      const scannedSheet = document.getElementById('scannedSheet').files[0];
+      const formData = new FormData();
+      formData.append('scannedSheet', scannedSheet);
+
+      fetch('http://localhost:3000/scan-sheet', {
+        method: 'POST',
+        body: formData
+      }).then(response => response.json())
+        .then(data => {
+          // Display the OCR results on the frontend
+          document.getElementById('results').innerHTML = `
+            <p>Question Numbers: ${data.questionNumbers.join(', ')}</p>
+            <p>Shaded Letters: ${data.shadedLetters.join(', ')}</p>
+          `;
+        }).catch(error => {
+          console.error(error);
+          alert('Error processing scanned sheet');
+        });
+    }
+  </script>
+</body>
+</html>

@@ -40,7 +40,7 @@ def process_image(file, correct_answers):
             answer_key = 'A' if white_pixel_percentage < shading_threshold else 'Not answered'
 
             # Retrieve the correct answer from the form
-            correct_answer = correct_answers.get(f'q{question_number}')
+            correct_answer = correct_answers.get(f'q{question_number}', 'A')
 
             # Evaluate the user's answer
             is_correct = answer_key == correct_answer
@@ -62,10 +62,12 @@ def index():
 def upload():
     if 'file' not in request.files:
         return "No file part"
+    
     file = request.files['file']
-
+    
     if file.filename == '':
         return "No selected file"
+    
     # Retrieve correct answers from the form
     correct_answers = {key: request.form[key] for key in request.form.keys() if key.startswith('q')}
 
